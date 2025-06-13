@@ -1,0 +1,46 @@
+/* Footer.css */
+
+.footer-page {
+    background-color: #222;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .app-name h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #00bcd4;
+  }
+  
+  .footer-nav {
+    margin: 15px 0;
+  }
+  
+  .nav-link a {
+    margin: 0 12px;
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  .footer-tagline {
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 10px;
+    color: #aaa;
+  }
+  
+  .footer-copy {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #888;
+  }
+  

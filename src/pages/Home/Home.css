@@ -1,0 +1,82 @@
+/* Home.css */
+.home-container {
+  padding-top: 72px;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 36px;
+    color: #222;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #555;
+  }
+  /* Home.css */
+.hero-banner {
+    width: 100%;
+    background-image: url("../../assets/banner.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 4px black;
+  }
+.hero-banner h1 {
+    font-size: 36px;
+  }
+.hero-banner p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+.action-buttons {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+.btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+.btn.lost {
+    background-color: #e63946;
+    color: white;
+  }
+.btn.found {
+    background-color: #457b9d;
+    color: white;
+}
+.preview-items {
+    padding: 20px;
+    text-align: center;
+  }
+.items-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+.item-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+.item-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+  }
+  
+  
+  
