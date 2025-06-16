@@ -11,11 +11,11 @@ import ItemDetails from "./pages/ItemDetails/ItemDetails";
 import Footer from "./components/Footer/Footer";
 
 
+
 function App() {
   return (
     <>
       <Navbar/>
-      
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/report-lost" element={<ReportLost/>}/>

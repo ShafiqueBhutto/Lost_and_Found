@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './ReportLost.css'
+import Swal from 'sweetalert2'
 
 export default function ReportLost() {
 
@@ -37,7 +38,13 @@ export default function ReportLost() {
 
     localStorage.setItem("lostItems", JSON.stringify(oldItems));
 
-    alert("Lost item report submitted")
+    // alert("Lost item report submitted")
+    Swal.fire({
+      title: 'Success!',
+      text: 'Lost item report submitted successfully.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    })
     setFormData({
       itemName: "",
       discription: "",

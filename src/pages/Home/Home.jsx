@@ -2,7 +2,7 @@ import React from 'react'
 import './Home.css'
 import lostItems from '../../data/lostItems'; 
 import { useNavigate } from 'react-router-dom';
-
+import About from '../AboutUS/About';
 
 export default function Home() {
   const NavBtn = useNavigate();
@@ -17,7 +17,9 @@ export default function Home() {
         <button className="btn found" onClick={()=>NavBtn('/report-found')}>Report Found Item</button>
       </div>
       </section>
+      <About/>
       {/* <section className="action-buttons">
+
         
       </section> */}
       <section className="preview-items">

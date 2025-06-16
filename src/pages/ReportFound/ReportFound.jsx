@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import './ReportFound.css'
+import Swal from 'sweetalert2';
+
 
 export default function ReportFound() {
 
@@ -37,7 +39,14 @@ export default function ReportFound() {
 
     localStorage.setItem("foundItems", JSON.stringify(oldItems));
 
-    alert("Found item reported successfully!");
+    Swal.fire({
+      title: 'Success!',
+      text: 'Found item report submitted successfully.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    })
+
+    // alert("Found item reported successfully!");
     //clear form
     setFormData({
       itemName: "",
