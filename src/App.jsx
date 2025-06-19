@@ -10,8 +10,6 @@ import FoundItems from "./pages/FoundItems/FoundItems";
 import ItemDetails from "./pages/ItemDetails/ItemDetails";
 import Footer from "./components/Footer/Footer";
 
-
-
 function App() {
   return (
     <>
