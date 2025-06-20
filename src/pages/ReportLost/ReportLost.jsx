@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './ReportLost.css'
 import Swal from 'sweetalert2'
+import { reportItem } from '../../api/itemApi'
 
 export default function ReportLost() {
 
@@ -20,41 +21,45 @@ export default function ReportLost() {
     })
   }
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const newItem = {
-      id: Date.now(),
-      title: formData.itemName,
-      discription: formData.discription,
+      type: "lost", 
+      name: formData.itemName,
+      description: formData.discription,
       location: formData.location,
       date: formData.date,
-      image: formData.image ? formData.image.name: ""
-    }
-
-    const oldItems = JSON.parse(localStorage.getItem("lostItems")) || [];
-
-    oldItems.push(newItem);
-
-    localStorage.setItem("lostItems", JSON.stringify(oldItems));
-
-    // alert("Lost item report submitted")
-    Swal.fire({
-      title: 'Success!',
-      text: 'Lost item report submitted successfully.',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    })
-    setFormData({
-      itemName: "",
-      discription: "",
-      location: "",
-      date: "",
-      image: null
-    });
-    e.target.reset();
-  }
+      image: formData.image ? formData.image.name : ""
+    };
   
+    try {
+      await reportItem(newItem);  
+      Swal.fire({
+        title: 'Success!',
+        text: 'Lost item report submitted successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+  
+      setFormData({
+        itemName: "",
+        discription: "",
+        location: "",
+        date: "",
+        image: null
+      });
+      e.target.reset();
+    } catch (error) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to submit lost item report.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      console.error(error);
+    }
+  };
 
   return (
     <div className="report-lost-container">
