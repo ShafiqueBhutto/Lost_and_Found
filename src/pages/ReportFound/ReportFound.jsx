@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './ReportFound.css'
 import Swal from 'sweetalert2';
+import { reportItem } from '../../api/itemApi';
 
 
 export default function ReportFound() {
@@ -21,40 +22,44 @@ export default function ReportFound() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newItem = {
-      id: Date.now(),
-      title: formData.itemName,
-      description: formData.description,
-      location: formData.foundLocation,
-      date: formData.foundDate,
-      image: formData.image ? formData.image.name: ""
+      type: "found",
+      name: formData.itemName,
+      description: formData.discription,
+      location: formData.location,
+      date: formData.date,
+      image: formData.image ? formData.image.name : ""
+    };
+
+    try {
+      await reportItem(newItem);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Found item reported successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      setFormData({
+        itemName: "",
+        discription: "",
+        location: "",
+        date: "",
+        image: null
+      });
+      e.target.reset();
+    } catch (err) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to report found item.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      console.error(err);
     }
-
-    const oldItems = JSON.parse(localStorage.getItem("foundItems")) || [];
-
-    oldItems.push(newItem);
-
-    localStorage.setItem("foundItems", JSON.stringify(oldItems));
-
-    Swal.fire({
-      title: 'Success!',
-      text: 'Found item report submitted successfully.',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    })
-
-    // alert("Found item reported successfully!");
-    //clear form
-    setFormData({
-      itemName: "",
-      foundDate: "",
-      foundLocation: "",
-      description: "",
-      image: null,
-    });
   };
 
   return (
