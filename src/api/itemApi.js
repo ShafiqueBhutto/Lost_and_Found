@@ -1,6 +1,13 @@
 import axios from "axios";
 
-const Api = 'http://localhost:5000/api/items';
+const Api = axios.create({
+  baseURL: "http://localhost:5000/api/items",
+});
 
-export const reportItem = (itemData) => axios.post(Api, itemData)
-export const getItemByType = (type) => axios.get(`${Api}/${type}`);
+export const reportItem = async (data) => {
+  return Api.post("/", data);
+};
+
+export const getItemByType = (type) => {
+  return Api.get(`/${type}`);
+};

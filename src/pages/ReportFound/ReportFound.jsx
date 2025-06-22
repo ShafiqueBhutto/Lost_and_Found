@@ -28,7 +28,7 @@ export default function ReportFound() {
     const newItem = {
       type: "found",
       name: formData.itemName,
-      description: formData.discription,
+      description: formData.description,
       location: formData.location,
       date: formData.date,
       image: formData.image ? formData.image.name : ""
