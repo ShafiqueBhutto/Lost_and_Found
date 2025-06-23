@@ -10,18 +10,31 @@ export default function FoundItems() {
   const [searchItem, setSearchItem] = useState('');
 
   useEffect(()=>{
-    const staticItems = [
-      { id: 1, title: 'Laptop', location: 'ABI', date: '29-May-2025', description: 'Found Dell black laptop', image: "laptop.jpeg" },
-      { id: 2, title: 'Earbuds', location: 'ABII', date: '30-May-2025', description: 'Found M10 Black earbuds', image: "m10.jpeg" },
-      { id: 3, title: 'Glasses', location: 'CC', date: '01-March-2025', description: 'I found the Black sun glasses', image: "glasses.jpeg" },
-      { id: 4, title: 'Brown Watch', location: 'Cricket Ground', date: '01-March-2025', description: 'I found the brown watch', image: "brownwatch.jpeg" },
-    ];
 
-    const storedItems = JSON.parse(localStorage.getItem("foundItems")) || [];
+    const getFoundItems = async() =>{
+      try{
+        const response = await fetch("http://localhost:5000/api/items/found")
+        const data = await response.json();
+        setAllItems(data)
+      }
+      catch(error){
+        console.error("Failed to fetch items", error)
+      }
+    }
+    getFoundItems();
 
-    const mergeAllitems = [...storedItems, ...staticItems];
+    // const staticItems = [
+    //   { id: 1, title: 'Laptop', location: 'ABI', date: '29-May-2025', description: 'Found Dell black laptop', image: "laptop.jpeg" },
+    //   { id: 2, title: 'Earbuds', location: 'ABII', date: '30-May-2025', description: 'Found M10 Black earbuds', image: "m10.jpeg" },
+    //   { id: 3, title: 'Glasses', location: 'CC', date: '01-March-2025', description: 'I found the Black sun glasses', image: "glasses.jpeg" },
+    //   { id: 4, title: 'Brown Watch', location: 'Cricket Ground', date: '01-March-2025', description: 'I found the brown watch', image: "brownwatch.jpeg" },
+    // ];
 
-    setAllItems(mergeAllitems);
+    // const storedItems = JSON.parse(localStorage.getItem("foundItems")) || [];
+
+    // const mergeAllitems = [...storedItems, ...staticItems];
+
+    // setAllItems(mergeAllitems);
   }, []);
 
   const filteredItems = allItems.filter(item => item.title.toLowerCase().includes(searchItem.toLowerCase()))
