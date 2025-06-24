@@ -1,5 +1,4 @@
 import './FoundItems.css'
-// import dummyData from '../../data/dummyData.js';
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -15,6 +14,7 @@ export default function FoundItems() {
       try{
         const response = await fetch("http://localhost:5000/api/items/found")
         const data = await response.json();
+        console.log("Found items fetched:", data);
         setAllItems(data)
       }
       catch(error){
@@ -37,7 +37,12 @@ export default function FoundItems() {
     // setAllItems(mergeAllitems);
   }, []);
 
-  const filteredItems = allItems.filter(item => item.title.toLowerCase().includes(searchItem.toLowerCase()))
+  const filteredItems = allItems.filter(item => {
+    if (!searchItem) return true;
+    return typeof item.name === 'string' && item.name.toLowerCase().includes(searchItem.toLowerCase());
+  });
+  
+
 
   return (
     <div className="found-items-page">
@@ -86,19 +91,19 @@ export default function FoundItems() {
       </div> */}
        {/* Dynamic Cards: from dummyData */}
        {filteredItems.map(item => (
-          <div key={item.id + item.title} className="found-item-card">
+          <div key={item._id + item.name} className="found-item-card">
             <img
               src={typeof item.image === 'string' ? `/foundItems/${item.image}`
               : URL.createObjectURL(item.image)}
               className='item-image'
-              alt={item.title}
+              alt={item.name}
               onError={(e) => e.target.style.display = 'none'} // hides image if not found
             />
-            <h4 className='item-title'>{item.title}</h4>
+            <h4 className='item-title'>{item.name}</h4>
             <p className='item-location'>Found at: {item.location}</p>
             <p className='item-date'>Date: {item.date}</p>
             <p className='item-discription'>{item.description}</p>
-            <Link to={`/item-details/found/${item.id}`} className="details-button-link">
+            <Link to={`/item-details/found/${item._id}`} className="details-button-link">
               View Details
             </Link>
           </div>

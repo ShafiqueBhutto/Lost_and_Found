@@ -20,9 +20,9 @@ export default function ItemDetails() {
 
   return (
     <div className="item-details-page">
-      <img src={`/${type === 'found' ? 'foundItems' : 'LostItems'}/${item.image}`} alt={item.title} className='details-image' />
+      <img src={`/${type === 'found' ? 'foundItems' : 'LostItems'}/${item.image}`} alt={item.name} className='details-image' />
       <div className="details-info">
-        <h4 className='details-title'>{item.title}</h4>
+        <h4 className='details-title'>{item.name}</h4>
         <p className='details-location'>Found at: {item.location}</p>
         <p className='details-date'>Date: {item.date}</p>
         <p className='details-description'>{item.description}</p>

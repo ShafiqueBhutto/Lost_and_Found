@@ -29,8 +29,8 @@ export default function ReportFound() {
       type: "found",
       name: formData.itemName,
       description: formData.description,
-      location: formData.location,
-      date: formData.date,
+      location: formData.foundLocation,
+      date: formData.foundDate,
       image: formData.image ? formData.image.name : ""
     };
 

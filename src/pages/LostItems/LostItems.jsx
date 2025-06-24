@@ -12,49 +12,67 @@ export default function LostItems() {
   const [searchItem, setSearchItem] = useState('');
 
   useEffect(()=>{
-    const staticItems = [
-      {
-        id: 5,
-        title: "PM Bag",
-        location: "AB III Room 211",
-        date: "30-June-2024",
-        description: "I lost the my PM Bag.",
-        image: "PMBag.jpg"
-      },
-      {
-        id: 6,
-        title: "Water Bottle",
-        location: "AB III Room 211",
-        date: "21-Feb-2024",
-        description: "I lost the my green steel water bottle",
-        image: "waterbottle.jpg"
-      },
-      {
-        id: 7,
-        title: "Laptop Charger",
-        location: "Library",
-        date: "11-March-2025",
-        description: "I lost the my HP laptop charger in library infront of PC table",
-        image: "charger.jpg"
-      },
-      {
-        id: 8,
-        title: "Earbuds",
-        location: "CC",
-        date: "15-April-2025",
-        description: "I lost the my Ronin black color earbuds at lunch time in CC.",
-        image: "ronin.jpg"
-      },
-    ];
 
-    const storedItems = JSON.parse(localStorage.getItem("lostItems")) || [];
+    const getLostItems = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/items/lost");
+        const data = await response.json();
+        console.log("Fetched lost items:", data); // <-- Add this
+        setAllItems(data);
+      } catch (error) {
+        console.error("Failed to fetch Lost Items: ", error);
+      }
+    };
+    getLostItems();
 
-    const mergeAllitems = [...storedItems, ...staticItems];
+    // const staticItems = [
+    //   {
+    //     id: 5,
+    //     title: "PM Bag",
+    //     location: "AB III Room 211",
+    //     date: "30-June-2024",
+    //     description: "I lost the my PM Bag.",
+    //     image: "PMBag.jpg"
+    //   },
+    //   {
+    //     id: 6,
+    //     title: "Water Bottle",
+    //     location: "AB III Room 211",
+    //     date: "21-Feb-2024",
+    //     description: "I lost the my green steel water bottle",
+    //     image: "waterbottle.jpg"
+    //   },
+    //   {
+    //     id: 7,
+    //     title: "Laptop Charger",
+    //     location: "Library",
+    //     date: "11-March-2025",
+    //     description: "I lost the my HP laptop charger in library infront of PC table",
+    //     image: "charger.jpg"
+    //   },
+    //   {
+    //     id: 8,
+    //     title: "Earbuds",
+    //     location: "CC",
+    //     date: "15-April-2025",
+    //     description: "I lost the my Ronin black color earbuds at lunch time in CC.",
+    //     image: "ronin.jpg"
+    //   },
+    // ];
 
-    setAllItems(mergeAllitems);
+    // const storedItems = JSON.parse(localStorage.getItem("lostItems")) || [];
+
+    // const mergeAllitems = [...storedItems, ...staticItems];
+
+    // setAllItems(mergeAllitems);
   }, []);
 
-  const filteredItems = allItems.filter(item => item.title.toLowerCase().includes(searchItem.toLowerCase()))
+  const filteredItems = allItems.filter(item => {
+    if (!searchItem) return true;
+    return typeof item.name === 'string' && item.name.toLowerCase().includes(searchItem.toLowerCase());
+  });
+  
+  
 
   return (
     
@@ -104,19 +122,18 @@ export default function LostItems() {
         </div> */}
 
         {filteredItems.map(item => (
-          <div key={item.id + item.title} className="lost-item-card">
+          <div key={item._id + item.name} className="lost-item-card">
             <img
-              src={typeof item.image === 'string' ? `/LostItems/${item.image}`
-              : URL.createObjectURL(item.image)}   
+              src={`/LostItems/${item.image}`}
               className='item-image'
-              alt={item.title}
+              alt={item.name || 'lost item'}
+              onError={(e) => e.target.style.display = 'none'}
             />
-
-            <h4 className='item-title'>{item.title}</h4>
+            <h4 className='item-title'>{item.name}</h4>
             <p className='item-location'>Lost at: {item.location}</p>
             <p className='item-date'>Date: {item.date}</p>
-            <p className='item-discription'>{item.discription}</p>
-            <Link to={`/item-details/lost/${item.id}`} className="details-button-link">
+            <p className='item-discription'>{item.description}</p>
+            <Link to={`/item-details/lost/${item._id}`} className="details-button-link">
               More Info
             </Link>
           </div>
