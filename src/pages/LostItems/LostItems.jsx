@@ -131,7 +131,7 @@ export default function LostItems() {
             />
             <h4 className='item-title'>{item.name}</h4>
             <p className='item-location'>Lost at: {item.location}</p>
-            <p className='item-date'>Date: {item.date}</p>
+            <p className='item-date'>Date: {new Date(item.date).toISOString().slice(0, 10).split('-').reverse().join('-')}</p>
             <p className='item-discription'>{item.description}</p>
             <Link to={`/item-details/lost/${item._id}`} className="details-button-link">
               More Info
