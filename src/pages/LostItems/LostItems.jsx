@@ -124,7 +124,7 @@ export default function LostItems() {
         {filteredItems.map(item => (
           <div key={item._id + item.name} className="lost-item-card">
             <img
-              src={`/LostItems/${item.image}`}
+              src={`http://localhost:5000/uploads/${item.image}`}
               className='item-image'
               alt={item.name || 'lost item'}
               onError={(e) => e.target.style.display = 'none'}

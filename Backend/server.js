@@ -11,6 +11,8 @@ const PORT = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads')); // Add this line
+
 
 // Routes
 app.use("/api/items", itemRoutes);

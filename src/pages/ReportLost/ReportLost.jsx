@@ -24,20 +24,27 @@ export default function ReportLost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const newItem = {
-      type: "lost", 
-      name: formData.itemName,
-      description: formData.discription,
-      location: formData.location,
-      date: formData.date,
-      image: formData.image ? formData.image.name : ""
-    };
+    const data = new FormData();
+    data.append("type", "lost");
+    data.append("name", formData.itemName);
+    data.append("description", formData.discription); // spelling matched
+    data.append("location", formData.location);       // fixed
+    data.append("date", formData.date);               // fixed
+    if (formData.image) {
+      data.append("image", formData.image);
+    }
   
     try {
-      await reportItem(newItem);  
+      const response = await fetch("http://localhost:5000/api/items", {
+        method: "POST",
+        body: data
+      });
+  
+      if (!response.ok) throw new Error("Failed");
+  
       Swal.fire({
         title: 'Success!',
-        text: 'Lost item report submitted successfully.',
+        text: 'Lost item reported successfully.',
         icon: 'success',
         confirmButtonText: 'OK'
       });
@@ -50,17 +57,17 @@ export default function ReportLost() {
         image: null
       });
       e.target.reset();
-    } catch (error) {
+    } catch (err) {
       Swal.fire({
         title: 'Error!',
-        text: 'Failed to submit lost item report.',
+        text: 'Failed to report lost item.',
         icon: 'error',
         confirmButtonText: 'OK'
       });
-      console.error(error);
+      console.error(err);
     }
   };
-
+    
   return (
     <div className="report-lost-container">
       <h2 className='form-heading'>Report a Lost Item</h2>

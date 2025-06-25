@@ -93,11 +93,10 @@ export default function FoundItems() {
        {filteredItems.map(item => (
           <div key={item._id + item.name} className="found-item-card">
             <img
-              src={typeof item.image === 'string' ? `/foundItems/${item.image}`
-              : URL.createObjectURL(item.image)}
+              src={`http://localhost:5000/uploads/${item.image}`}
               className='item-image'
-              alt={item.name}
-              onError={(e) => e.target.style.display = 'none'} // hides image if not found
+              alt={item.name || 'found item'}
+              onError={(e) => e.target.style.display = 'none'}
             />
             <h4 className='item-title'>{item.name}</h4>
             <p className='item-location'>Found at: {item.location}</p>

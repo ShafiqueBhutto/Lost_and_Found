@@ -23,44 +23,52 @@ export default function ReportFound() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const newItem = {
-      type: "found",
-      name: formData.itemName,
-      description: formData.description,
-      location: formData.foundLocation,
-      date: formData.foundDate,
-      image: formData.image ? formData.image.name : ""
-    };
+  const data = new FormData();
+  data.append("type", "found");
+  data.append("name", formData.itemName);
+  data.append("description", formData.description);
+  data.append("location", formData.foundLocation);
+  data.append("date", formData.foundDate);
+  if (formData.image) {
+    data.append("image", formData.image);
+  }
 
-    try {
-      await reportItem(newItem);
-      Swal.fire({
-        title: 'Success!',
-        text: 'Found item reported successfully.',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
+  try {
+    const response = await fetch("http://localhost:5000/api/items", {
+      method: "POST",
+      body: data
+    });
 
-      setFormData({
-        itemName: "",
-        discription: "",
-        location: "",
-        date: "",
-        image: null
-      });
-      e.target.reset();
-    } catch (err) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Failed to report found item.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      console.error(err);
-    }
-  };
+    if (!response.ok) throw new Error("Failed");
+
+    Swal.fire({
+      title: 'Success!',
+      text: 'Found item reported successfully.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+
+    setFormData({
+      itemName: "",
+      foundDate: "",
+      foundLocation: "",
+      description: "",
+      image: null
+    });
+    e.target.reset();
+  } catch (err) {
+    Swal.fire({
+      title: 'Error!',
+      text: 'Failed to report found item.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="report-found-container">
