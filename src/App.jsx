@@ -9,12 +9,17 @@ import LostItems from "./pages/LostItems/LostItems";
 import FoundItems from "./pages/FoundItems/FoundItems";
 import ItemDetails from "./pages/ItemDetails/ItemDetails";
 import Footer from "./components/Footer/Footer";
+import Signup from './pages/Signup/Signup'
+import Login from './pages/Login/Login'
+
 
 function App() {
   return (
     <>
       <Navbar/>
       <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home/>}/>
         <Route path="/report-lost" element={<ReportLost/>}/>
         <Route path="/report-found" element={<ReportFound/>}/>
@@ -29,5 +34,6 @@ function App() {
     </>
   )
 }
-
 export default App
+
+

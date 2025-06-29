@@ -26,7 +26,7 @@ export default function Home() {
     <div className="home-container">
       <section className='hero-banner'>
       <h1>Welcome to the Lost & Found Portal</h1>
-      <p>Report or find lost items within your campus easily and quickly.</p>
+      <p>Report or find lost and found items within your campus easily and quickly.</p>
       <div className="action-buttons">
         <button className="btn lost" onClick={()=>NavBtn('/report-lost')}>Report Lost Item</button>
         <button className="btn found" onClick={()=>NavBtn('/report-found')}>Report Found Item</button>
@@ -46,6 +46,9 @@ export default function Home() {
           <img src={`http://localhost:5000/uploads/${item.image}`} alt={item.name} />
           <h3>{item.name}</h3>
          <p>{item.description}</p>
+         {/* <button className="details-btn" onClick={() => NavBtn(`/details/${item._id}/${item.type}`)}>
+            More Details
+         </button> */}
         </div>
         ))}
       </div>
