@@ -1,12 +1,18 @@
 import React from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../public/Logo/logo.png'
+import {useAuth} from '../../context/AuthContext'
 
 export default function Navbar() {
 
-    const isLoggedIn = false;
+    const {user, logout} = useAuth();
+    const navigate = useNavigate()
 
+    const handleLogout = () =>{
+      logout();
+      navigate('/login')
+    }
 
   return (
     <nav className='navbar'>
@@ -17,11 +23,13 @@ export default function Navbar() {
         <Link to="/report-found">Report Found</Link>
         <Link to="/lost-items">Lost Items</Link>
         <Link to="/found-items">Found Items</Link>
-        {isLoggedIn ? (<button className="logout-btn">Logout</button>):(
+        {!user ? (
           <>
-            <Link to="/login" className="nav-btn">Login</Link>
-            <Link to="/signup" className="nav-btn">Signup</Link>
+            <Link to="/login" className="auth-link">Login</Link>
+            <Link to="/signup" className="auth-link">Sign Up</Link>
           </>
+        ) : (
+          <button onClick={handleLogout} className="logout-button">Logout</button>
         )}
       </div>
     </nav>

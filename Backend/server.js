@@ -4,6 +4,7 @@ const cors = require("cors");
 
 
 const itemRoutes = require("./routes/itemRoutes");
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = 5000;
@@ -16,6 +17,7 @@ app.use('/uploads', express.static('uploads')); // Add this line
 
 // Routes
 app.use("/api/items", itemRoutes);
+app.use('/api/auth', authRoutes);
 
 // Database Connection
 mongoose.connect("mongodb+srv://shafiquebhutto304:eTE1B73aWsPyk851@cluster0.on0cvlx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")

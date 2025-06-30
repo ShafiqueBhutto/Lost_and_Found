@@ -11,6 +11,7 @@ import ItemDetails from "./pages/ItemDetails/ItemDetails";
 import Footer from "./components/Footer/Footer";
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 
 function App() {
@@ -21,8 +22,16 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home/>}/>
-        <Route path="/report-lost" element={<ReportLost/>}/>
-        <Route path="/report-found" element={<ReportFound/>}/>
+        <Route path="/report-lost" element={
+          <PrivateRoute>
+            <ReportLost />
+          </PrivateRoute>
+        } />
+        <Route path="/report-found" element={
+          <PrivateRoute>
+              <ReportFound />
+          </PrivateRoute>
+        } />
         <Route path="/found-items" element={<FoundItems />} />
         <Route path="/lost-items" element={<LostItems />} />
         {/* <Route path="/item/:id" element={<ItemDetails />} /> */}
