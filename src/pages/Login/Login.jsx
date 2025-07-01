@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
@@ -8,7 +8,6 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get the page user originally wanted
   const from = location.state?.from?.pathname || "/";
 
   const [email, setEmail] = useState("");
@@ -19,11 +18,19 @@ export default function Login() {
     e.preventDefault();
     const res = await login(email, password);
     if (res.success) {
-      navigate(from, { replace: true }); // Redirect back to the protected route
+      navigate(from, { replace: true }); 
     } else {
       setError(res.message);
     }
   };
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "#222"; 
+
+    return () => {
+      document.body.style.backgroundColor = ""; 
+    };
+  }, []);
 
   return (
     <div className="auth-container">

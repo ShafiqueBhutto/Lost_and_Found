@@ -33,6 +33,23 @@
     width: 40px;
     height: 40px;
   }
+  .auth-btn {
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 14px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+  }
+  
+  .auth-btn:hover {
+    background-color: rgb(197, 9, 9);
+  }
+  
   
 
   

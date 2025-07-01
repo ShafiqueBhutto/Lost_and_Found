@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
@@ -22,9 +22,17 @@ export default function Signup() {
     }
   };
 
+  useEffect(() => {
+    document.body.style.backgroundColor = "#222"; 
+
+    return () => {
+      document.body.style.backgroundColor = ""; 
+    };
+  }, []);
+
   return (
     <div className="auth-container">
-      <h2>Signup</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSignup}>
         {error && <p className="error-msg">{error}</p>}
         <input
@@ -48,7 +56,7 @@ export default function Signup() {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Signup</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
