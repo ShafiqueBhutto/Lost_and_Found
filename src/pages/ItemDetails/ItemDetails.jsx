@@ -10,7 +10,7 @@ export default function ItemDetails() {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/items/${type}`);
+        const response = await fetch(`/api/items/${type}`);
         const items = await response.json();
         const selectedItem = items.find((i) => i._id === id);
         setItem(selectedItem);
@@ -29,7 +29,7 @@ export default function ItemDetails() {
   return (
     <div className="item-details-page">
       <img
-        src={`http://localhost:5000/uploads/${item.image}`}
+        src={`/uploads/${item.image}`}
         alt={item.name}
         className='details-image'
       />

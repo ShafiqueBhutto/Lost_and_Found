@@ -10,13 +10,13 @@ export default function Home() {
 
   useEffect(()=>{
     //for lost
-    fetch("http://localhost:5000/api/items/lost")
+    fetch("/api/items/lost")
     .then((res)=>res.json())
     .then((data)=>setLostItems(data.slice(-4).reverse()))
     .catch((err)=>console.error("Error fetching lost items:", err))
 
     //for found
-    fetch("http://localhost:5000/api/items/found")
+    fetch("/api/items/found")
     .then((res)=>res.json())
     .then((data)=>setFoundItems(data.slice(-4).reverse()))
     .catch((err)=>console.error("Error fetching found items:", err))
@@ -43,7 +43,7 @@ export default function Home() {
         <div className="items-grid">
            {lostItems.map((item) => (
           <div className="item-card" key={item._id}>
-          <img src={`http://localhost:5000/uploads/${item.image}`} alt={item.name} />
+          <img src={`/uploads/${item.image}`} alt={item.name} />
           <h3>{item.name}</h3>
          <p>{item.description}</p>
          {/* <button className="details-btn" onClick={() => NavBtn(`/details/${item._id}/${item.type}`)}>
@@ -60,7 +60,7 @@ export default function Home() {
         <div className="items-grid">
            {foundItems.map((item) => (
           <div className="item-card" key={item._id}>
-          <img src={`http://localhost:5000/uploads/${item.image}`} alt={item.name} />
+          <img src={`/uploads/${item.image}`} alt={item.name} />
           <h3>{item.name}</h3>
          <p>{item.description}</p>
         </div>
