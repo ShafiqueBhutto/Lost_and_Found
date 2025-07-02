@@ -9,7 +9,7 @@ export default function ItemDetails() {
 
   const dataSource = type === 'found' ? JSON.parse(localStorage.getItem('foundItems')) : JSON.parse(localStorage.getItem('lostItems'));
  
-  // const items = JSON.parse(localStorage.getItem('foundItems'))
+  
   const item = dataSource.find((item) => item.id === parseInt(id));
 
 

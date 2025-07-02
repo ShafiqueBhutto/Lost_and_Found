@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/Logo/logo.png'; // <-- Correct path
+import logo from '../../assets/Logo/logo.png'; 
 
 export default function Navbar() {
   return (
