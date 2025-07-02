@@ -40,11 +40,13 @@ router.post("/", upload.single('image'), async (req, res) => {
 
 router.get("/:type", async (req, res) => {
   try {
-    const items = await Item.find({ type: req.params.type });
+    const typeParam = req.params.type.toLowerCase(); // 👈 normalize
+    const items = await Item.find({ type: typeParam });
     res.json(items);
   } catch (error) {
     res.status(500).json({ message: "Error fetching items", error });
   }
 });
+
 
 module.exports = router;
