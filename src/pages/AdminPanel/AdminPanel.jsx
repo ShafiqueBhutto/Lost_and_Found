@@ -6,7 +6,7 @@ export default function AdminPanel() {
   const [items, setItems] = useState([]);
 
   const fetchItems = async () => {
-    const res = await fetch("http://localhost:5000/api/admin/items", {
+    const res = await fetch("/api/admin/items", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -28,7 +28,7 @@ export default function AdminPanel() {
       });
 
       if (confirm.isConfirmed) {
-        const res = await fetch(`http://localhost:5000/api/admin/items/${id}`, {
+        const res = await fetch(`/api/admin/items/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
