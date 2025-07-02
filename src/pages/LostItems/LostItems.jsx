@@ -15,7 +15,7 @@ export default function LostItems() {
 
     const getLostItems = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/items/lost");
+        const response = await fetch("/api/items/lost");
         const data = await response.json();
         console.log("Fetched lost items:", data); // <-- Add this
         setAllItems(data);
@@ -124,7 +124,7 @@ export default function LostItems() {
         {filteredItems.map(item => (
           <div key={item._id + item.name} className="lost-item-card">
             <img
-              src={`http://localhost:5000/uploads/${item.image}`}
+              src={`/uploads/${item.image}`}
               className='item-image'
               alt={item.name || 'lost item'}
               onError={(e) => e.target.style.display = 'none'}

@@ -12,7 +12,7 @@ export default function FoundItems() {
 
     const getFoundItems = async() =>{
       try{
-        const response = await fetch("http://localhost:5000/api/items/found")
+        const response = await fetch("/api/items/found")
         const data = await response.json();
         console.log("Found items fetched:", data);
         setAllItems(data)
@@ -93,7 +93,7 @@ export default function FoundItems() {
        {filteredItems.map(item => (
           <div key={item._id + item.name} className="found-item-card">
             <img
-              src={`http://localhost:5000/uploads/${item.image}`}
+              src={`/uploads/${item.image}`}
               className='item-image'
               alt={item.name || 'found item'}
               onError={(e) => e.target.style.display = 'none'}
