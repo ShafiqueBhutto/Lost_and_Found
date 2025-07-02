@@ -17,15 +17,24 @@ export default function Navbar() {
     <nav className='navbar'>
       <div className="logo">
         <Link to="/">
-          <img src={Logo} alt="Lost and found" className='logo-img' />
+          <img src={Logo} alt="Lost and Found" className='logo-img' />
         </Link>
       </div>
+
       <div className="nav-links">
         <Link to="/">Home</Link>
-        <Link to="/report-lost">Report Lost</Link>
-        <Link to="/report-found">Report Found</Link>
         <Link to="/lost-items">Lost Items</Link>
         <Link to="/found-items">Found Items</Link>
+
+        {user && (
+          <>
+            <Link to="/report-lost">Report Lost</Link>
+            <Link to="/report-found">Report Found</Link>
+          </>
+        )}
+        {user && user.isAdmin === true && (
+          <span className="admin-badge">Admin</span>
+        )}
 
         {!user ? (
           <>

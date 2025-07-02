@@ -34,7 +34,7 @@ export default function Signup() {
     <div className="auth-container">
       <h2>Register</h2>
       <form onSubmit={handleSignup}>
-        {error && <p className="error-msg">{error}</p>}
+        
         <input
           type="text"
           placeholder="Name"
@@ -56,6 +56,7 @@ export default function Signup() {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
+        {error && <p className="error-msg">{error}</p>}
         <button type="submit">Register</button>
       </form>
     </div>

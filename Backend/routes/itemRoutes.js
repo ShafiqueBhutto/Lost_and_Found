@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Item = require("../models/Item"); // Assuming you have a model
+const Item = require("../models/Item"); 
 const multer = require("multer");
 const path = require('path');
 

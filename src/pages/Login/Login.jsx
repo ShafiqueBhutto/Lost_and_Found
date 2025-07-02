@@ -18,7 +18,11 @@ export default function Login() {
     e.preventDefault();
     const res = await login(email, password);
     if (res.success) {
-      navigate(from, { replace: true }); 
+      if (res.user.isAdmin) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate(from, { replace: true });
+      }
     } else {
       setError(res.message);
     }
