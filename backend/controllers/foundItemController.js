@@ -1,29 +1,3 @@
-// import FoundItem from "../models/FoundItem.js";
-
-// export const getFoundItems = async (req, res) => {
-//   try {
-//     const items = await FoundItem.find().sort({ date: -1 });
-//     res.json(items);
-//   } catch (error) {
-//     console.error("Failed to fetch found items:", error);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// };
-
-
-// import FoundItem from "../models/FoundItem.js";
-
-// export const getFoundItems = async (req, res) => {
-//   try {
-//     const items = await FoundItem.find().sort({ date: -1 });
-//     res.json(items);
-//   } catch (error) {
-//     console.error("Error fetching found items:", error);
-//     res.status(500).json({ error: "Server Error" });
-//   }
-// };
-
-// backend/controllers/foundItemController.js
 import FoundItem from "../models/FoundItem.js";
 
 export const reportFoundItem = async (req, res) => {
