@@ -21,7 +21,7 @@ router.post('/signup', async (req, res) => {
     const token = createToken(user);
     res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin } });
   } catch (err) {
-    console.error('Signup error:', err);
+    console.error('Signup error:', err.message, err);
     if (err.code === 11000) {
       return res.status(400).json({ error: 'User already exists' });
     }
