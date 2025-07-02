@@ -1,8 +1,6 @@
 import React from 'react'
 import './ItemDetails.css'
 import { useParams } from "react-router-dom";
-import foundItems from '../../data/dummyData'; 
-import lostItems from '../../data/lostItems';
 
 export default function ItemDetails() {
   const { id, type } = useParams();
