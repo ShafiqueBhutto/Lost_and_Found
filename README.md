@@ -208,9 +208,3 @@ Things to remember:
 ## 👩‍💻 Author
 
 **Shafique Bhutto**
-
----
-
-## 📄 License
-
-This project is for educational purposes. Add a license of your choice (for example MIT) if you plan to share it publicly.
